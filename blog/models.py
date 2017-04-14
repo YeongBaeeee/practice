@@ -1,3 +1,4 @@
+# blog/models.py
 import re
 from django.forms import ValidationError
 from django.db import models
@@ -20,5 +21,5 @@ class Post(models.Model):
     lnglat = models.CharField(max_length=50, help_text='위도/경도 포맷으로 입력하세요.',
                               blank=True, validators=[lnglat_validator])
     created_at = models.DateTimeField(auto_now_add=True)
-    update_at = models.DateTimeField(auto_now=True)
+    updated_at = models.DateTimeField(auto_now=True)
 
