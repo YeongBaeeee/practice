@@ -1,3 +1,4 @@
+# dojo/views_cbv.py
 from django.views.generic import View, TemplateView
 from django.http import HttpResponse, JsonResponse
 from django.conf import settings
