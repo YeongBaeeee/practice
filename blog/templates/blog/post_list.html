@@ -1,5 +1,13 @@
 
 <h1>AskDjango</h1>
 <p>안녕하세요. 여러분의 파이썬/장고 페이스메이커가 되겠습니다.</p>
-
+{%  for post in post_list %}
+    <li>
+        {{ post.id }}
+        {{ post.title }}
+        <small>by {{ post.author }}</small>
+        <small>at {{ post.updated_at }} </small>
+    </li>
+{% endfor %}
 <ul>
+    <li>http://www.13.124.86.222:8000/blog/ 로 접속해보세요.</li>
