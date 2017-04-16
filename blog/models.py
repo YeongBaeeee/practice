@@ -30,5 +30,8 @@ class Post(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
+    class Meta:
+        ordering = ['-id'] #필드에 대해서 내림차순 정렬 [id]는 오름차순 정렬
+
     def __str__(self):
         return self.title
