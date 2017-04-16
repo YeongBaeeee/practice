@@ -1,7 +1,7 @@
 # blog/admin.py
 from django.contrib import admin
 from django.utils.safestring import mark_safe
-from blog.models import Post
+from blog.models import Post, Comment
 
 
 @admin.register(Post)
@@ -27,3 +27,7 @@ class PostAdmin(admin.ModelAdmin):
         self.message_user(request, '{} sucessfully marked as Withdrawn'.format(updated_count))
 
 #admin.site.register(Post, PostAdmin)
+
+@admin.register(Comment)
+class CommentAdmin(admin.ModelAdmin):
+    pass
