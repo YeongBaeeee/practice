@@ -27,6 +27,7 @@ class Post(models.Model):
     lnglat = models.CharField(max_length=50, help_text='위도/경도 포맷으로 입력하세요.',
                               blank=True, validators=[lnglat_validator])
     status = models.CharField(max_length=1, choices=STATUS_CHOICES)
+    tag_set = models.ManyToManyField('Tag')
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
@@ -43,3 +44,10 @@ class Comment(models.Model):
     massage = models.TextField()
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+
+
+class Tag(models.Model):
+    name = models.CharField(max_length=20, unique=True) #같은 테그테이블에 테그이름이 겹치지 않게..
+
+    def __str__(self):
+        return self.name
