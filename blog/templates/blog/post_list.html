@@ -1,3 +1,9 @@
+<html>
+<head>
+    <meta charset="utf-8">
+<title>AskDjango's blog</title>
+</head>
+<body>
 
 <h1>AskDjango</h1>
 
@@ -9,7 +15,7 @@
 </form>
 
 <ul>
-{%  for post in post_list %}
+{% for post in post_list %}
     <li>
         {{ post.id }}
         {{ post.title }}
@@ -17,5 +23,10 @@
         <small>at {{ post.updated_at }} </small>
     </li>
 {% endfor %}
+</ul>
+
 <ul>
     <li>http://www.13.124.86.222:8000/blog/ 로 접속해보세요.</li>
+</ul>
+</body>
+</html>
