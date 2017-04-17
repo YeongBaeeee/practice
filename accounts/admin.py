@@ -1,3 +1,11 @@
-from django.contrib import admin
+# accounts/admin.py
 
-# Register your models here.
+from django.contrib import admin
+from .models import Porfile
+
+
+@admin.register(Porfile)
+class ProfileAdmin(admin.ModelAdmin):
+    pass
+
+
