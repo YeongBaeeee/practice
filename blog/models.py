@@ -15,7 +15,7 @@ class Post(models.Model):
         ('p', 'Published'),
         ('w', 'Withdrawn'),
     )
-    user = models.ForeignKey(settings.AUTH_USER_MODEL)
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='blog_post_set')
     title = models.CharField(max_length=100, verbose_name='제목',
                              help_text='포스팅 제목을 입력해 주세요. 최대 100자 내외.')
                           #   choices=(
