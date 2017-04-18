@@ -14,7 +14,7 @@
 <ul>
     <li>
     {% for comment in post.comment_set.all %}
-        {{ comment.massage }}
+        {{ comment.message }}
         <small>by {{ comment.author }}</small>
         <small>at {{ comment.updated_at }}</small>
     </li>

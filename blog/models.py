@@ -41,7 +41,7 @@ class Post(models.Model):
 class Comment(models.Model):
     post = models.ForeignKey(Post)
     author = models.CharField(max_length=50)
-    massage = models.TextField()
+    message = models.TextField()
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
