@@ -2,10 +2,10 @@
 
 from django.contrib import admin
 
-from .models import Porfile
+from .models import Profile
 
 
-@admin.register(Porfile)
+@admin.register(Profile)
 class ProfileAdmin(admin.ModelAdmin):
     pass
 
