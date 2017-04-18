@@ -45,6 +45,9 @@ class Comment(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
+    def __str__(self):
+        return self.message
+
 
 class Tag(models.Model):
     name = models.CharField(max_length=20, unique=True) #같은 테그테이블에 테그이름이 겹치지 않게..
