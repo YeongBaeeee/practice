@@ -1,25 +1,53 @@
 {% extends "blog/layout.html" %}
 
 {% block content %}
-    <form action="" method="get">
-    <input type="text" name="q" value="{{ q }}"/>
-    <input type="submit" value="검색"/>
-</form>
+    <div class="container">
+        <div class="jumbotron">
+            <h1>Django Template</h1>
+            <p>임시페이지</p>
+            <p>
+                <a class="btn btn-lg btn-primary" href="http://facebook.com/groups/askdjango">
+                AskDjango 페이스북 그룹 &raquo;
+                </a>
+            </p>
+        </div>
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="alert alert-info">
+                    <ul>
+                    <li>http://www.13.124.86.222:8000/blog/ 로 접속해보세요.</li>
+                    </ul>
+                </div>
+                <p>
+                <form action="" method="get">
+                    <input type="text" name="q" value="{{ q }}"/>
+                    <input type="submit" value="검색" class="btn btn-primary"/>
+                </form>
+                </p>
+                <table class="table table-hover table-bordered">
+                <thead>
+                    <tr>
+                        <th>id</th>
+                        <th>title</th>
+                        <th>author</th>
+                        <th>updated_at</th>
 
-<ul>
-{% for post in post_list %}
-    <li>
-        {{ post.id }}
-        <a href ="{% url "blog:post_detail" post.id %}">
-            {{ post.title }}
-        </a>
-        <small>by {{ post.author }}</small>
-        <small>at {{ post.updated_at }} </small>
-    </li>
-{% endfor %}
-</ul>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for post in post_list %}
+                        <tr>
+                            <td>{{ post.id }}</td>
+                            <td><a href ="{% url "blog:post_detail" post.id %}">{{ post.title }}</a></td>
+                            <td><small>by {{ post.author }}</small></td>
+                            <td><small>at {{ post.updated_at }} </small></td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+                </table>
+            </div>
 
-<ul>
-    <li>http://www.13.124.86.222:8000/blog/ 로 접속해보세요.</li>
-</ul>
+        </div>
+    </div>
+
 {%  endblock %}
