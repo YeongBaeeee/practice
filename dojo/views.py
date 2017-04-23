@@ -31,7 +31,11 @@ def post_new(request):
                                        content=form.cleaned_data['content'])
             '''
             # 방법 4 사전이니까 **로 언팩
+            '''
             post = Post.objects.create(**form.cleaned_data)
+            '''
+            # 방법 5
+            post = form.save()
             return redirect('/dojo/') # 혹은 namespace:name 써도됨
     else:
         form = PostForm()
