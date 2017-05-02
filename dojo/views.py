@@ -35,7 +35,9 @@ def post_new(request):
             post = Post.objects.create(**form.cleaned_data)
             '''
             # 방법 5
-            post = form.save()
+            post = form.save(commit=False)
+            post.ip = request.META['REMOTE_ADDR']
+            post.save()
             return redirect('/dojo/') # 혹은 namespace:name 써도됨
     else:
         form = PostForm()
