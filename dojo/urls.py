@@ -3,11 +3,15 @@ from  django.conf.urls import url
 from . import views
 from . import views_cbv
 
+
 urlpatterns =[
 
+    url(r'^$', views.post_list),
     url(r'^user/$', views.add_user),
     url(r'^(?P<id>\d+)/user_edit/$', views.user_edit),
 
+
+    url(r'^list/$', views.post_list),
     url(r'^new/$', views.post_new),
     url(r'^(?P<id>\d+)/edit/$', views.post_edit),
 
@@ -25,3 +29,5 @@ urlpatterns =[
     url(r'^cbv/excel/$', views_cbv.excel_download),
 
 ]
+
+

@@ -1,7 +1,7 @@
 #dojo/models.py
 from django.db import models
 from django import forms
-from django.core.validators import MinLengthValidator
+
 
 
 def min_length_3_validator(value):

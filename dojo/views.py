@@ -2,6 +2,7 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse, JsonResponse
 from django.conf import settings
+from django.views.generic import ListView
 from .forms import PostForm, GameUserSignupForm, GameUserSignupForm2
 from .models import Post, GameUser
 import os
@@ -40,33 +41,39 @@ def user_edit(request, id):
                   })
 
 
+def post_list(request):
+    qs = Post.objects.all()
+    return render(request, 'dojo/post_list.html',
+                  {
+                      'post_list': qs,
+                  })
+post_list = ListView.as_view(model=Post, paginate_by=10)
+
+'''
 def post_new(request):
     if request.method == 'POST':
         form = PostForm(request.POST, request.FILES)
+        print("in?")
         if form.is_valid():
+            print("in!")
             print(form.cleaned_data)
             # 방법 1
-            '''
             post = Post()
             post.title = form.cleaned_data['title']
             post.content = form.cleaned_data['content']
             post.save()
-            '''
+
             # 방법 2
-            '''
             post = Post.(title=form.Cleaned_data['title'],
                             content=form.cleaned_data['content'])
             post.save()
-            '''
             # 방법 3
-            '''
             post = Post.objects.create(title=form.cleaned_data['title'],
                                        content=form.cleaned_data['content'])
-            '''
             # 방법 4 사전이니까 **로 언팩
-            '''
+
             post = Post.objects.create(**form.cleaned_data)
-            '''
+
             # 방법 5
             post = form.save(commit=False)
             post.ip = request.META['REMOTE_ADDR']
@@ -79,7 +86,23 @@ def post_new(request):
                   {
                       'form' : form,
                   })
-
+'''
+def post_new(request):
+    if request.method == 'POST':
+        form = PostForm(request.POST, request.FILES)
+        print("valid?")
+        if form.is_valid():
+            print("valid!")
+            post = form.save(commit=False)
+            post.ip = request.META['REMOTE_ADDR']
+            post.save()
+            return redirect('/dojo/')  # namespace:name
+    else:
+        print("invalid")
+        form = PostForm()
+    return render(request, 'dojo/post_form.html', {
+        'form': form,
+    })
 
 def post_edit(request, id):
     post = get_object_or_404(Post, id=id)

@@ -1,6 +1,33 @@
-<h1>AskDjango</h1>
-<p>{{name}}</p>
-<p>안녕하세요. 여러분의 파이썬/장고 페이스메이커가 되겠습니다.</p>
-<hr/>
+{% load bootstrap3 staticfiles %}
+{% bootstrap_css %}
+{% bootstrap_javascript %}
 
-<p>실습</p>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-6 col-md-offset-3">
+            <table class="table table-bordered table-hover">
+            <caption>Post List</caption>
+            <thead>
+                <tr>
+                 <th>title</th>
+                    <th>created at</th>
+                 </tr>
+             </thead>
+            <tbody>
+            {% for post in post_list %}
+                <tr>
+                    <td>{{ post.title }}</td>
+                    <td>{{ post.updated_at }}</td>
+                 </tr>
+             {% endfor %}
+     </tbody>
+</table>
+
+        </div>
+    </div>
+</div>
+
+<div class="text-center">
+    {% bootstrap_pagination page_obj %}
+</div>

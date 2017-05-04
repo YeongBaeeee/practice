@@ -15,7 +15,7 @@ class PostForm(forms.ModelForm):
         #fields = '__all__'
         fields = ['title', 'content', 'user_agent']
         widgets = {
-            'user_agent' : forms.HiddenInput
+            'user_agent': forms.HiddenInput
         }
     '''
     def save(self, commit=True):
