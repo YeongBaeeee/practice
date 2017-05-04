@@ -4,6 +4,10 @@ from . import views
 from . import views_cbv
 
 urlpatterns =[
+
+    url(r'^user/$', views.add_user),
+    url(r'^(?P<id>\d+)/user_edit/$', views.user_edit),
+
     url(r'^new/$', views.post_new),
     url(r'^(?P<id>\d+)/edit/$', views.post_edit),
 

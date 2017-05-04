@@ -2,9 +2,42 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse, JsonResponse
 from django.conf import settings
-from .forms import PostForm
-from .models import Post
+from .forms import PostForm, GameUserSignupForm, GameUserSignupForm2
+from .models import Post, GameUser
 import os
+
+
+def add_user(request):
+    if request.method == 'POST':
+        form = GameUserSignupForm2(request.POST, request.FILES)
+        if form.is_valid():
+            user = GameUser.objects.create(**form.cleaned_data)
+            return redirect('/dojo/')
+    else:
+        form = GameUserSignupForm2()
+    return render(request, 'dojo/post_form.html',
+                  {
+                      'form' : form,
+                  })
+
+def user_edit(request, id):
+    user = get_object_or_404(GameUser, id=id)
+    print(user.id)
+    if request.method == 'POST':
+        form = GameUserSignupForm(request.POST, request.FILES)
+        if form.is_valid():
+            user = GameUser.objects.update(**form.cleaned_data)
+            return redirect('/dojo/') # 혹은 namespace:name 써도됨
+    else:
+        form = GameUser.objects.get(id=user.id)
+        print(form.id)
+        print(form.server_name)
+        form = GameUserSignupForm2()
+
+    return render(request, 'dojo/post_form.html',
+                  {
+                      'form' : form,
+                  })
 
 
 def post_new(request):
@@ -63,7 +96,6 @@ def post_edit(request, id):
 
     return render(request, 'dojo/post_form.html',
                   {
-
                       'form' : form,
                   })
 

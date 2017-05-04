@@ -18,6 +18,9 @@
                     <li>http://www.13.124.86.222:8000/blog/ 로 접속해보세요.</li>
                     </ul>
                 </div>
+
+                <a href="{% url "blog:post_new" %}" class="btn btn-primary pull-right">New Post</a>
+
                 <p>
                 <form action="" method="get">
                     <input type="text" name="q" value="{{ q }}"/>
