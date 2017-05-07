@@ -25,7 +25,7 @@ class Post(models.Model):
                           #       ('제목3', '제목3레이블'),
                           #   ))
     content = models.TextField(verbose_name='내용')
-    photo = models.ImageField(blank=True)
+    photo = models.ImageField(blank=True, upload_to='blog/post/%Y/%m/%d')
     tags = models.CharField(max_length=100, blank=True)
     lnglat = models.CharField(max_length=50, help_text='위도/경도 포맷으로 입력하세요.',
                               blank=True, validators=[lnglat_validator])
