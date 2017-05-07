@@ -137,3 +137,7 @@ DEBUG_TOOLBAR_CONFIG = {
     "SHOW_TOOLBAR_CALLBACK" : show_toolbar,
 }
 
+from django.contrib.messages import constants
+
+MESSAGE_LEVEL = constants.DEBUG  # 지금부터 debug 레벨의 message를 남길 수 있음.
+MESSAGE_TAGS = {constants.ERROR: 'danger'}
