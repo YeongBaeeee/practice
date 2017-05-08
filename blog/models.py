@@ -4,7 +4,8 @@ from django.conf import settings
 from django.core.urlresolvers import reverse
 from django.forms import ValidationError
 from django.db import models
-
+from imagekit.models import ProcessedImageField
+from imagekit.processors import Thumbnail
 
 def lnglat_validator(value):
     if not re.match(r'^([+-]?\d+\.?\d*),([+-]?\d+\.?\d)$', value):
@@ -25,7 +26,11 @@ class Post(models.Model):
                           #       ('제목3', '제목3레이블'),
                           #   ))
     content = models.TextField(verbose_name='내용')
-    photo = models.ImageField(blank=True, upload_to='blog/post/%Y/%m/%d')
+    photo = ProcessedImageField(blank=True, upload_to='blog/post/%Y/%m/%d',
+                                       processors=[Thumbnail(300, 300)],
+                                       format='JPEG',
+                                       options={'quality' : 60}
+                                       )
     tags = models.CharField(max_length=100, blank=True)
     lnglat = models.CharField(max_length=50, help_text='위도/경도 포맷으로 입력하세요.',
                               blank=True, validators=[lnglat_validator])
