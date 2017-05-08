@@ -8,8 +8,8 @@ from imagekit.models import ProcessedImageField
 from imagekit.processors import Thumbnail
 
 def lnglat_validator(value):
-    if not re.match(r'^([+-]?\d+\.?\d*),([+-]?\d+\.?\d)$', value):
-        raise ValidationError('Invalid LngLat Type')
+    if not re.match(r'^([+-]?\d+\.?\d*),([+-]?\d+\.?\d*)$', value):
+        raise ValidationError('Invalid LngLat Type!')
 
 class Post(models.Model):
     STATUS_CHOICES =(
