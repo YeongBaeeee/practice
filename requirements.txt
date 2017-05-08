@@ -3,3 +3,5 @@ django-debug-toolbar
 django-extenstions
 ipython
 django-bootstrap3
+pilkit
+django-imagekit
