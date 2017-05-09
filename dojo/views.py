@@ -18,8 +18,9 @@ def add_user(request):
         form = GameUserSignupForm2()
     return render(request, 'dojo/post_form.html',
                   {
-                      'form' : form,
+                      'form': form,
                   })
+
 
 def user_edit(request, id):
     user = get_object_or_404(GameUser, id=id)
@@ -28,7 +29,7 @@ def user_edit(request, id):
         form = GameUserSignupForm(request.POST, request.FILES)
         if form.is_valid():
             user = GameUser.objects.update(**form.cleaned_data)
-            return redirect('/dojo/') # 혹은 namespace:name 써도됨
+            return redirect('/dojo/')  # 혹은 namespace:name 써도됨
     else:
         form = GameUser.objects.get(id=user.id)
         print(form.id)
@@ -37,7 +38,7 @@ def user_edit(request, id):
 
     return render(request, 'dojo/post_form.html',
                   {
-                      'form' : form,
+                      'form': form,
                   })
 
 
@@ -47,6 +48,8 @@ def post_list(request):
                   {
                       'post_list': qs,
                   })
+
+
 post_list = ListView.as_view(model=Post, paginate_by=10)
 
 '''
@@ -87,6 +90,8 @@ def post_new(request):
                       'form' : form,
                   })
 '''
+
+
 def post_new(request):
     if request.method == 'POST':
         form = PostForm(request.POST, request.FILES)
@@ -104,6 +109,7 @@ def post_new(request):
         'form': form,
     })
 
+
 def post_edit(request, id):
     post = get_object_or_404(Post, id=id)
     if request.method == 'POST':
@@ -113,23 +119,32 @@ def post_edit(request, id):
             post = form.save(commit=False)
             post.ip = request.META['REMOTE_ADDR']
             post.save()
-            return redirect('/dojo/') # 혹은 namespace:name 써도됨
+            return redirect('/dojo/')  # 혹은 namespace:name 써도됨
     else:
         form = PostForm(instance=post)
 
     return render(request, 'dojo/post_form.html',
                   {
-                      'form' : form,
+                      'form': form,
                   })
+
+
+def post_detail(request, id):
+    post = get_object_or_404(Post, id=id)
+    return render(request, 'dojo/post_detail.html', {
+        'post' : post,
+    })
+    pass
 
 
 def mysum(request, numbers):
     return HttpResponse(sum(map(lambda s: int(s or 0), numbers.split('/'))))
-     # int (s or 0) numbers가 거짓이면 0으로 바꿔줌
+    # int (s or 0) numbers가 거짓이면 0으로 바꿔줌
 
-    #def mysum(request, x, y):
+    # def mysum(request, x, y):
+
+
 #    return HttpResponse(int(x) + int(y))
-
 
 def hello(request, name, age):
     return HttpResponse('안녕하세요. {} {}살이시네요.'.format(name, age))
@@ -145,19 +160,20 @@ def post_list1(request):
 
 
 def post_list2(request):
-    name ='공유'
+    name = '공유'
     return render(request, 'dojo/post_list.html', {'name': name})
 
 
 def post_list3(request):
     return JsonResponse({
-        'message' : '안녕, 파이썬&장고',
-        'items' : ['파이썬', '장고', 'Celery', 'Azure', 'AWS'],
-        },json_dumps_params={'ensure_ascii':False},
-        content_type=u"application/json; charset=utf-8",)
+        'message': '안녕, 파이썬&장고',
+        'items': ['파이썬', '장고', 'Celery', 'Azure', 'AWS'],
+    }, json_dumps_params={'ensure_ascii': False},
+        content_type=u"application/json; charset=utf-8", )
+
 
 def excel_download(request):
-    #filepath = '/home/ubuntu/askdjango/gdplev.xls'
+    # filepath = '/home/ubuntu/askdjango/gdplev.xls'
     filepath = os.path.join(settings.BASE_DIR, 'gdplev.xls')
     filename = os.path.basename(filepath)
     with open(filepath, 'rb')as f:
