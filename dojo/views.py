@@ -131,6 +131,8 @@ def post_edit(request, id):
 
 
 # post_detail = DetailView.as_view(model=Post, pk_url_kwarg='id')
+# 생략이 가능한 이유는 DetailView의 기본값이 pk값임..?! 그래서
+#urls.py에도 id 대신 pk값을 넘겨주면 잘 작동됨
 post_detail = DetailView.as_view(model=Post)
 
 

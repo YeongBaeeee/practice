@@ -3,9 +3,12 @@
 from django.views.generic import CreateView
 from .models import Post
 from django import forms
+from django.views.generic import ListView, CreateView
 
 
 # 원래는 별로도 blog/forms.py에 구현해야하지만, 안헷갈리게 하기위해.. 나중에 수정할듯?!
+
+post_list = ListView.as_view(model=Post, paginate_by=3)
 
 class PostForm(forms.ModelForm):
     class Meta:
