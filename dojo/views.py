@@ -130,7 +130,8 @@ def post_edit(request, id):
                   })
 
 
-post_detail = DetailView.as_view(model=Post, pk_url_kwarg='id')
+# post_detail = DetailView.as_view(model=Post, pk_url_kwarg='id')
+post_detail = DetailView.as_view(model=Post)
 
 
 def mysum(request, numbers):
