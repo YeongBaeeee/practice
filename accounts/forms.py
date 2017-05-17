@@ -10,8 +10,9 @@ class SignupForm(UserCreationForm):
     address = forms.CharField()
 
     class Meta(UserCreationForm.Meta):
-       # fields = ('username', 'email')
-       fields = UserCreationForm.Meta.fields + ('email',)
+        #fields = ('__all__')
+        #fields = ('username', 'email')
+        fields = UserCreationForm.Meta.fields + ('email',)
 
     def save(self):
         user = super().save()
@@ -30,3 +31,4 @@ class LoginForm(AuthenticationForm):
         if answer != 6:
             raise forms.ValidationError('mismatched!')
         return answer
+
