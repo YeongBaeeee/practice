@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+{% load socialaccount %}
 
 <form action="" method="post">
     {% csrf_token %}
@@ -8,3 +9,20 @@
     </table>
     <input type="submit" />
 </form>
+
+
+<ul>
+{% for provider in providers %}
+    <li>
+        {% if provider.social_app %}
+            <a href="{% provider_login_url provider.id %}">
+                {{ provider.name }}
+            </a>
+        {% else %}
+            <a>
+                Provider {{ provider.name }} 설정이 필요합니다.
+            </a>
+        {% endif %}
+    </li>
+{% endfor %}
+</ul>

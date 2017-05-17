@@ -9,4 +9,6 @@
  <li>is_superuser : {{ user.is_superuser }}</li>
     <li>date_join : {{ user.date_joined }}</li>
     </ul>
+
+    <img src="{{ user.socialaccount_set.all.first.get_avatar_url }}" />
 {% endblock %}
