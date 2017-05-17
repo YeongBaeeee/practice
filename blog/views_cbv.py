@@ -8,7 +8,17 @@ from django.core.urlresolvers import reverse_lazy
 
 # 원래는 별로도 blog/forms.py에 구현해야하지만, 안헷갈리게 하기위해.. 나중에 수정할듯?!
 
-post_list = ListView.as_view(model=Post, paginate_by=5)
+
+class PostListView(ListView):
+    model = Post
+    queryset = Post.objects.prefetch_related('tag_set', 'comment_set').all()
+    paginate_by = 5
+
+post_list = PostListView.as_view()
+
+#post_list = ListView.as_view(model=Post,
+#                             queryset=Post.objects.prefetch_related('tag_set', 'comment_set').all(),
+#                             paginate_by=5)
 
 post_detail = DetailView.as_view(model=Post, pk_url_kwarg='id')
 
