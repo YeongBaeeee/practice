@@ -7,7 +7,7 @@ from .forms import PostForm
 from django.contrib import messages
 
 def post_list(request):
-    qs = Post.objects.all()
+    qs = Post.objects.prefetch_related('tag_set', 'comment_set').all()
 
     q = request.GET.get('q', '') #q가 있으면 가져오고 없으면 빈문자열가져옴
     if q:
