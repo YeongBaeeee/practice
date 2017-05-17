@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'debug_toolbar',
     'django_extensions',
     'imagekit',
+    'raven.contrib.django.raven_compat',
     'blog',
     'dojo',
     'accounts',
@@ -152,3 +153,22 @@ MESSAGE_LEVEL = constants.DEBUG  # 지금부터 debug 레벨의 message를 남�
 MESSAGE_TAGS = {constants.ERROR: 'danger'}
 
 NAVER_CLIENT_ID = 'JrxOAM21Hlr_Q_afVdRI'
+
+import os
+import raven
+
+GIT_ROOT = os.path.join(BASE_DIR) # FIXME: 현 프로젝트 ROOT 지정
+if os.path.exists(os.path.join(GIT_ROOT, '.git')):
+ print('git root')
+ release = raven.fetch_git_sha(GIT_ROOT) # 현재 최근 커밋해시 획득
+ print(release)
+else:
+ release = 'dev'
+
+ RAVEN_CONFIG = {
+     'dsn': 'https://f36f51365a6d4b7b956d76d6838abf0a:f02612492a5243ee86593d7a4c94683d@sentry.io/169313',
+     # If you are using git, you can also automatically configure the
+     # release based on the git info.
+     'release': release,
+     #'release': raven.fetch_git_sha(os.path.dirname(os.pardir)),
+ }
